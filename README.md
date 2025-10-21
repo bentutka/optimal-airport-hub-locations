@@ -26,27 +26,29 @@ Alabama, Arkansas, Florida, Georgia, Louisiana, Mississippi, North Carolina, Okl
 ## Methodology
 
 ### Model Type
-The project uses a **weighted p-median model**, where:
-- \( i \) indexes **counties**  
-- \( j \) indexes **airports**
+The project uses a **weighted p-median model**, where:  
+- *i* indexes **counties**  
+- *j* indexes **airports**
 
-**Decision Variables**
-- \( X_{ij} = 1 \) if county *i* is assigned to airport *j*; 0 otherwise  
-- \( Y_j = 1 \) if airport *j* is selected as one of the *p* optimal hubs; 0 otherwise  
+**Decision Variables**  
+- Xᵢⱼ = 1 if county *i* is assigned to airport *j*; 0 otherwise  
+- Yⱼ = 1 if airport *j* is selected as one of the *p* optimal hubs; 0 otherwise  
 
-**Parameters**
-- \( d_{ij} \): distance between county *i* and airport *j*  
-- \( a_i \): population of county *i*  
-- \( p \): number of airports to select  
+**Parameters**  
+- dᵢⱼ – distance between county *i* and airport *j*  
+- aᵢ – population of county *i*  
+- p – number of airports to select  
 
-**Objective Function**
+**Objective Function**  
 Minimize total weighted distance:
 
-\[
-\text{Minimize } \sum_i \sum_j a_i \cdot d_{ij} \cdot X_{ij}
-\]
+**Minimize:** Σᵢ Σⱼ (aᵢ × dᵢⱼ × Xᵢⱼ)
 
-subject to assignment, selection, and binary constraints.
+subject to:
+- Each county is assigned to exactly one airport  
+- Only *p* airports are selected  
+- A county cannot be assigned to an unselected airport  
+- Decision variables Xᵢⱼ and Yⱼ are binary (0 or 1)
 
 ---
 
@@ -72,7 +74,8 @@ subject to assignment, selection, and binary constraints.
 The model identified **Bill & Hillary Clinton Airport (Little Rock, AR)** as the optimal hub location within the state.
 
 ### Phase 2 – Regional Expansion
-After extending the model to 11 states and setting \( p = 3 \), the optimal hub locations were:
+After extending the model to 11 states and setting p = 3, the optimal hub locations were:
+
 1. **Easterwood Airport (College Station, TX)**  
 2. **Anderson Regional Airport (Anderson, SC)**  
 3. **Lakeland Linder International Airport (Lakeland, FL)**  
